@@ -1,5 +1,5 @@
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-    <app-user-info></app-user-info>
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" style="float: right; width: 80%">
+    <app-user-info (formReady)="formInitialized('user-info', $event)"></app-user-info>
 
     <div class="docs-example-viewer-wrapper">
 
@@ -10,3 +10,6 @@
         </app-main-block>
     </div>
 </form>
+<div style="float: left; width: 20%; overflow: hidden">
+{{checkoutForm.value | json}}
+</div>

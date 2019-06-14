@@ -1,7 +1,7 @@
-<div class="docs-example-viewer-wrapper">
+<div class="docs-example-viewer-wrapper" [formGroup]="userInfoForm">
     <h1> Блок контактов пользователя </h1>
     <mat-form-field>
         <mat-label> Имя пользователя</mat-label>
-        <input matInput placeholder="Введите имя">
+        <input formControlName="name" matInput placeholder="Введите имя">
     </mat-form-field>
 </div>

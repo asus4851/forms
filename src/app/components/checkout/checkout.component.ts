@@ -13,8 +13,8 @@ export class CheckoutComponent implements OnInit {
      * Форма чекаута (главная форм группа всего чекаута)
      */
     public checkoutForm: FormGroup;
-    
-    public products = [1,2];
+
+    public products = [1, 2];
 
     constructor (
         private formBuilder: FormBuilder,
@@ -28,4 +28,7 @@ export class CheckoutComponent implements OnInit {
         console.log('submit');
     }
 
+    public formInitialized (name: string, form: FormGroup): void {
+        this.checkoutForm.setControl(name, form);
+    }
 }
