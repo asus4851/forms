@@ -1,10 +1,17 @@
 <app-task class="docs-example-viewer-wrapper" style="left:0; width: 60%; padding: 2%">
 </app-task>
-<div class="docs-example-viewer-wrapper" style="right: 0; width: 30%; border-left: 1px solid black; padding: 3%" >
+<div class="docs-example-viewer-wrapper" style="right: 0; width: 30%; border-left: 1px solid black; padding: 3%">
     <h2>Список задач</h2>
     <div *ngFor="let task of tasks" style="padding: 10px; border-bottom: 1px solid black">
         <h2>{{task.title}}</h2>
-        <h2>{{task.description}}</h2>
-        <h2>{{task.assigned}}</h2>
+        <h3>{{task.description}}</h3>
+        <h3>{{task.assigned}}</h3>
+        <ng-container *ngIf="task.subTasks.length > 0">
+            <div *ngFor="let subTask of task.subTasks" style="border:  1px solid red; padding: 10px">
+                <h4>{{subTask.title}}</h4>
+                <h4>{{subTask.description}}</h4>
+            </div>
+        </ng-container>
+
     </div>
 </div>

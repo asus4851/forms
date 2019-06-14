@@ -10,12 +10,14 @@ import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskComponent } from './components/tasks/components/task/task.component';
 import { MatIconModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatFormFieldModule } from '@angular/material';
 import { TasksService } from './services/tasks.service';
+import { SubTaskComponent } from './components/tasks/components/task/components/sub-task/sub-task.component';
 
 @NgModule({
     declarations : [
         AppComponent,
         TasksComponent,
         TaskComponent,
+        SubTaskComponent,
     ],
     imports      : [
         BrowserModule,
