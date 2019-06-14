@@ -49,6 +49,8 @@ export class TaskComponent implements OnInit {
     saveTask () {
         if (this.taskForm.valid) {
             this.tasksService.saveTask(this.taskForm.getRawValue());
+            this.taskForm.reset();
+            this.subTaskArray = [];
         }
     }
 
