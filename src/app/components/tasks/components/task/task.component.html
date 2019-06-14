@@ -1,0 +1,23 @@
+
+<h2> Новая задача:</h2>
+
+<form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+
+
+    <mat-form-field class="display-block">
+    <mat-label> Название задачи</mat-label>
+    <input matInput formControlName="title" placeholder="Введите название задачи">
+    </mat-form-field>
+
+    <mat-form-field class="display-block">
+        <mat-label> Описание задачи</mat-label>
+        <input matInput formControlName="description" placeholder="Введите описание задачи">
+    </mat-form-field>
+
+    <mat-form-field class="display-block">
+        <mat-label> Исполнитель</mat-label>
+        <input matInput formControlName="assigned" placeholder="Выберите исполнителя">
+    </mat-form-field>
+
+    <button mat-button type="submit">Сохранить задачу</button>
+</form>

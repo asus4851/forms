@@ -3,34 +3,33 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserInfoComponent } from './components/checkout/components/user-info/user-info.component';
-import { MainBlockComponent } from './components/checkout/components/main-block/main-block.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TaskComponent } from './components/tasks/components/task/task.component';
+import { MatIconModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatFormFieldModule } from '@angular/material';
+import { TasksService } from './services/tasks.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CheckoutComponent,
-    UserInfoComponent,
-    MainBlockComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations : [
+        AppComponent,
+        TasksComponent,
+        TaskComponent,
+    ],
+    imports      : [
+        BrowserModule,
+        AppRoutingModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
+    providers    : [TasksService],
+    bootstrap    : [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
