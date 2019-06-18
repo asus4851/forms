@@ -11,6 +11,7 @@ import { TaskComponent } from './components/tasks/components/task/task.component
 import { MatIconModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatFormFieldModule } from '@angular/material';
 import { TasksService } from './services/tasks.service';
 import { SubTaskComponent } from './components/tasks/components/task/components/sub-task/sub-task.component';
+import { ViewDirective } from './directives/view.directive';
 
 @NgModule({
     declarations : [
@@ -18,6 +19,7 @@ import { SubTaskComponent } from './components/tasks/components/task/components/
         TasksComponent,
         TaskComponent,
         SubTaskComponent,
+        ViewDirective
     ],
     imports      : [
         BrowserModule,
@@ -33,5 +35,6 @@ import { SubTaskComponent } from './components/tasks/components/task/components/
     ],
     providers    : [TasksService],
     bootstrap    : [AppComponent],
+    entryComponents:[SubTaskComponent]
 })
 export class AppModule {}

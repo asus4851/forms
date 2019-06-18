@@ -17,17 +17,20 @@
         <input matInput formControlName="assigned" placeholder="Выберите исполнителя">
     </mat-form-field>
 
-    <h2 *ngIf="subTaskArray.length > 0">Подзадачи:</h2>
-    <div *ngFor="let subTaskNumber of subTaskArray; let i = index" style="margin-bottom: 10px; border-bottom: 1px solid black">
-        <app-sub-task (formReady)="subTaskInit($event)" (remove)="removeSubTask(i)">
-            <h3>Подзадача: {{subTaskNumber+1}}</h3>
-        </app-sub-task>
+    <!--<h2 *ngIf="subTaskArray.length > 0">Подзадачи:</h2>-->
+    <!--<div *ngFor="let subTaskNumber of subTaskArray; let i = index" style="margin-bottom: 10px; border-bottom: 1px solid black">-->
+        <!--<app-sub-task (formReady)="subTaskInit($event)" (remove)="removeSubTask(i)">-->
+            <!--<h3>Подзадача: {{subTaskNumber+1}}</h3>-->
+        <!--</app-sub-task>-->
+    <!--</div>-->
+    <div *ngFor="let item of elements">
+        <ng-container *view="item.view"></ng-container>
     </div>
 
     <button mat-button type="submit">Создать задачу</button>
     <button mat-button type="button" (click)="createSubTask()">Создать подзадачу</button>
 
 </form>
-<!--<div style="position: fixed; right: 0">-->
-    <!--{{taskForm.value | json}}-->
-<!--</div>-->
+<div style="position: fixed; right: 0">
+    {{taskForm.value | json}}
+</div>

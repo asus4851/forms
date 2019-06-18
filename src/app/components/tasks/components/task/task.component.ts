@@ -1,6 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    ComponentFactoryResolver,
+    OnInit,
+    QueryList,
+    ViewChild,
+    ViewChildren,
+    ViewContainerRef,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TasksService } from '../../../../services/tasks.service';
+import { SubTaskComponent } from './components/sub-task/sub-task.component';
 
 @Component({
     selector    : 'app-task',
@@ -10,13 +20,20 @@ import { TasksService } from '../../../../services/tasks.service';
 export class TaskComponent implements OnInit {
     public taskForm: FormGroup;
     public subTask: FormArray;
+    public counter = 0;
+    
+    private elements: SubTaskComponent[] = [];
+    @ViewChild('container', { read : ViewContainerRef }) container: ViewContainerRef;
 
-    countSubTasks = 0;
-    subTaskArray = [];
+    constructor(
+        private formBuilder: FormBuilder,
+        private tasksService: TasksService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private viewContainerRef: ViewContainerRef,
+    ) { }
 
-    constructor (private formBuilder: FormBuilder, private tasksService: TasksService) { }
-
-    ngOnInit () {
+    ngOnInit() {
 
         this.taskForm = this.formBuilder.group({
             title       : new FormControl(
@@ -46,30 +63,36 @@ export class TaskComponent implements OnInit {
         this.taskForm.setControl('subTasks', this.subTask);
     }
 
-    saveTask () {
+    saveTask() {
         if (this.taskForm.valid) {
             this.tasksService.saveTask(this.taskForm.getRawValue());
             this.taskForm.reset();
-            this.subTaskArray = [];
         }
     }
 
-    subTaskInit (event) {
-        this.subTask.push(event);
+    subTaskInit(event) {
+
     }
 
-    createSubTask () {
-        this.subTaskArray.push(this.countSubTasks);
-        this.countSubTasks++;
+    createSubTask() {
+        const resolve = this.componentFactoryResolver.resolveComponentFactory(SubTaskComponent);
+        const componentInstance = this.viewContainerRef.createComponent(resolve);
+        componentInstance.instance['formReady'].subscribe(event => {
+            this.subTask.push(event);
+        });
+        componentInstance.instance.index = this.counter;
+        this.counter++;
+        componentInstance.instance['remove'].subscribe(event => {
+            this.subTask.removeAt(event);
+            componentInstance.destroy();
+
+        });
+        const newItem: SubTaskComponent = componentInstance.instance;
+        this.elements.push(newItem);
+        this.changeDetectorRef.detectChanges();
     }
 
-    removeSubTask (i) {
-        this.subTask.removeAt(i);
-        const index = this.subTaskArray.indexOf(i);
-        if (index > -1) {
-            this.subTaskArray.splice(index, 1);
-        }
-        this.countSubTasks--;
-    }
+    removeSubTask(i) {
 
+    }
 }
