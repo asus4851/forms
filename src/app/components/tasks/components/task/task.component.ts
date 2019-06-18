@@ -64,11 +64,8 @@ export class TaskComponent implements OnInit {
     }
 
     removeSubTask (i) {
-        console.log(i);
-        console.log(this.subTask);
-        console.log(this.subTaskArray);
         this.subTask.removeAt(i);
-        let index = this.subTaskArray.indexOf(i);
+        const index = this.subTaskArray.indexOf(i);
         if (index > -1) {
             this.subTaskArray.splice(index, 1);
         }
