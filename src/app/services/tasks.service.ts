@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Сервис для работы с данными по товарам
@@ -8,15 +9,20 @@ import { BehaviorSubject } from 'rxjs';
 export class TasksService {
     public tasks: BehaviorSubject<Array<any>> = new BehaviorSubject([]);
 
-    constructor () {}
+    constructor(private http: HttpClient) {}
 
-    public getTasks (): BehaviorSubject<any> {
+    public getTasks(): BehaviorSubject<any> {
         return this.tasks;
     }
 
-    saveTask (dataObj) {
+    saveTask(dataObj) {
         const currentValue = this.tasks.value;
         const updatedValue = [...currentValue, dataObj];
         this.tasks.next(updatedValue);
+    }
+
+    getName(title) {
+        return this.http.get("./assets/httpTest.json", {
+        });
     }
 }

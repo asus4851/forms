@@ -12,6 +12,7 @@ import { MatIconModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatF
 import { TasksService } from './services/tasks.service';
 import { SubTaskComponent } from './components/tasks/components/task/components/sub-task/sub-task.component';
 import { ViewDirective } from './directives/view.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations : [
@@ -26,6 +27,7 @@ import { ViewDirective } from './directives/view.directive';
         AppRoutingModule,
         MatButtonModule,
         MatCheckboxModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         MatIconModule,
         ReactiveFormsModule,
