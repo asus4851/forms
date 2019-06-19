@@ -17,14 +17,9 @@
         <input matInput formControlName="assigned" placeholder="Выберите исполнителя">
     </mat-form-field>
 
-    <!--<h2 *ngIf="subTaskArray.length > 0">Подзадачи:</h2>-->
-    <!--<div *ngFor="let subTaskNumber of subTaskArray; let i = index" style="margin-bottom: 10px; border-bottom: 1px solid black">-->
-        <!--<app-sub-task (formReady)="subTaskInit($event)" (remove)="removeSubTask(i)">-->
-            <!--<h3>Подзадача: {{subTaskNumber+1}}</h3>-->
-        <!--</app-sub-task>-->
-    <!--</div>-->
-    <div *ngFor="let item of elements">
-        <ng-container *view="item.view"></ng-container>
+    <div>
+        <h2 >Подзадачи:</h2>
+        <div #container></div>
     </div>
 
     <button mat-button type="submit">Создать задачу</button>

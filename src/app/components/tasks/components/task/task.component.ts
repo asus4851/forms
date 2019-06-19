@@ -1,7 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
+    ComponentFactoryResolver, ElementRef,
     OnInit,
     QueryList,
     ViewChild,
@@ -21,7 +21,7 @@ export class TaskComponent implements OnInit {
     public taskForm: FormGroup;
     public subTask: FormArray;
     public counter = 0;
-    
+
     private elements: SubTaskComponent[] = [];
     @ViewChild('container', { read : ViewContainerRef }) container: ViewContainerRef;
 
@@ -30,7 +30,7 @@ export class TaskComponent implements OnInit {
         private tasksService: TasksService,
         private changeDetectorRef: ChangeDetectorRef,
         private componentFactoryResolver: ComponentFactoryResolver,
-        private viewContainerRef: ViewContainerRef,
+        // private viewContainerRef: ViewContainerRef,
     ) { }
 
     ngOnInit() {
@@ -70,13 +70,9 @@ export class TaskComponent implements OnInit {
         }
     }
 
-    subTaskInit(event) {
-
-    }
-
     createSubTask() {
         const resolve = this.componentFactoryResolver.resolveComponentFactory(SubTaskComponent);
-        const componentInstance = this.viewContainerRef.createComponent(resolve);
+        const componentInstance = this.container.createComponent(resolve);
         componentInstance.instance['formReady'].subscribe(event => {
             this.subTask.push(event);
         });
@@ -85,14 +81,9 @@ export class TaskComponent implements OnInit {
         componentInstance.instance['remove'].subscribe(event => {
             this.subTask.removeAt(event);
             componentInstance.destroy();
-
         });
         const newItem: SubTaskComponent = componentInstance.instance;
         this.elements.push(newItem);
         this.changeDetectorRef.detectChanges();
-    }
-
-    removeSubTask(i) {
-
     }
 }
